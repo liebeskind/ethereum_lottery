@@ -20,4 +20,14 @@ describe('Lottery Contract', () => {
   it('deploys a contract', () => {
     assert.ok(lottery.options.address);
   });
+
+  it('allows one account to enter', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('0.02', 'ether') //prevents us from having to add all zeros of wei
+    })
+
+    const players = await lottery.methods.getPlayers().call();
+  })
+
 });
