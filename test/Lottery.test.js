@@ -75,4 +75,15 @@ describe('Lottery Contract', () => {
       assert(err);
     }
   });
+
+  it('only a manager can pick a winner', async() => {
+    try {
+      await lottery.methods.pickWinner.send({
+        from: accounts[1],
+      });
+      assert(false); //If we get to this line of code, fail automatically.
+    } catch (err) {
+      assert(err);
+    }
+  });
 });
